@@ -50,6 +50,64 @@ Denormalized, analytics-ready tables for Etsy listing data. Includes pricing, va
 - [listing_all_attributes](listing_mart/listing_all_attributes.md) - ALL listing attributes
 - [listing_current_discounts](listing_mart/listing_current_discounts.md) - Active sales/discounts
 
+### transaction_mart
+
+**Schema**: `etsy-data-warehouse-prod.transaction_mart`
+
+Denormalized, analytics-ready tables for all Etsy transactions and receipts. Includes GMS, buyer/seller demographics, visit attribution, and post-purchase metrics.
+
+**📖 [View transaction_mart Documentation](transaction_mart/README.md)**
+
+#### Tables
+
+**⭐ One Big Tables (OBT) - Start Here:**
+- [receipt_obt](transaction_mart/receipt_obt.md) - **Complete receipt data** (GMS, visits, post-purchase)
+- [transaction_obt](transaction_mart/transaction_obt.md) - **Complete transaction data** (GMS, visits, reviews)
+
+**Foundation Tables:**
+- [all_receipts](transaction_mart/all_receipts.md) - Core receipt data
+- [all_transactions](transaction_mart/all_transactions.md) - Core transaction data
+
+**GMS (Revenue) Tables:**
+- [receipts_gms](transaction_mart/receipts_gms.md) - Receipt-level GMS with aggregations
+- [transactions_gms](transaction_mart/transactions_gms.md) - Transaction GMS (accounting focus)
+- [transactions_gms_by_trans](transaction_mart/transactions_gms_by_trans.md) - Transaction GMS (operational focus)
+- [accounting_gms](transaction_mart/accounting_gms.md) - Accounting GMS by date/source
+- [accounting_gms_by_trans](transaction_mart/accounting_gms_by_trans.md) - Accounting GMS simplified
+
+**Enrichment Tables:**
+- [transactions_buyer](transaction_mart/transactions_buyer.md) - Buyer demographics & payment
+- [transactions_seller](transaction_mart/transactions_seller.md) - Seller location at transaction time
+- [accounting_seller](transaction_mart/accounting_seller.md) - Seller location at accounting time
+- [all_transactions_categories](transaction_mart/all_transactions_categories.md) - Categories & taxonomy
+
+**Visit Attribution Tables:**
+- [transactions_visits](transaction_mart/transactions_visits.md) - Visit attribution per transaction
+- [receipts_visits](transaction_mart/receipts_visits.md) - Visit attribution per receipt
+
+**Post-Purchase Tables:**
+- [transaction_post_purch](transaction_mart/transaction_post_purch.md) - Refunds & reviews
+- [receipt_post_purch](transaction_mart/receipt_post_purch.md) - Returns, cases & help requests
+
+#### Quick Example: Daily Revenue
+
+```sql
+-- Use receipt_obt for receipt-level analysis
+SELECT
+    DATE(creation_tsz) AS order_date,
+    market,
+    COUNT(*) AS receipt_count,
+    SUM(trans_gms_net) AS total_gms,
+    AVG(trans_gms_net) AS avg_order_value
+FROM `etsy-data-warehouse-prod.transaction_mart.receipt_obt`
+WHERE DATE(creation_tsz) = '2026-03-19'
+  AND is_test_buyer = 0
+  AND is_test_seller = 0
+GROUP BY order_date, market
+```
+
+**Note**: All transaction_mart money fields are in **USD dollars** (not cents like listing_mart).
+
 ## Quick Start
 
 ### Example: Get Active Listings with Prices
@@ -72,10 +130,16 @@ WHERE l.is_active = 1
 ## Important Notes
 
 ### Money Fields
-**All price fields are stored in CENTS** - always divide by 100 for display:
+
+**listing_mart**: All price fields are stored in **CENTS** (INT64) - always divide by 100 for display:
 ```sql
 price_usd / 100.0 AS price_dollars  -- ✅ Correct
 price_usd AS price_dollars          -- ❌ Wrong - shows cents!
+```
+
+**transaction_mart**: All price/GMS fields are already in **DOLLARS** (NUMERIC) - no conversion needed:
+```sql
+trans_gms_net AS total_gms  -- ✅ Already in dollars
 ```
 
 ### Exchange Rates
