@@ -22,6 +22,17 @@ First visit attribution and metadata for each user
 
 **Owner Team**: visits-support@etsy.pagerduty.com
 
+## Column Reference
+
+| Column | Type | Source Table | Business Logic | Description |
+|--------|------|--------------|----------------|-------------|
+| `user_id` | INT64 | `user_mart.user_visit_daily_analytic` | Primary Key | User ID. Primary Key |
+| `visit_id` | INT64 | `visit_mart.visits` | From first visit (ROW_NUMBER = 1 by start_datetime) | Visit ID of user's first visit |
+| `run_date` | INT64 | `user_mart.user_visit_daily_analytic` | Unix date of first visit (visit_day_number = 1) | Unix date of user's first visit |
+| `start_datetime` | TIMESTAMP | `visit_mart.visits` | From first visit | Start time of user's first visit |
+| `registered` | INT64 | `visit_mart.visits` | From first visit | Registered indicator of user's first visit (1 = registered, 0 = guest) |
+| `top_channel` | STRING | `visit_mart.visits` | From first visit | Top channel of user's first visit (e.g., 'direct', 'organic', 'paid') |
+
 ## Query Guidance
 
 ### Common Query Pattern
