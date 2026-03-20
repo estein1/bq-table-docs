@@ -1,12 +1,18 @@
 ---
 id: listings
-title: listing_mart.listings
+title: etsy-data-warehouse-prod.listing_mart.listings
 sidebar_label: listings
 ---
 
-# listing_mart.listings
+# listings
+
+Core listing mart table containing current state of all Etsy listings with pricing, availability, and shop information.
 
 ## Table Overview
+
+**Full Table Name:** `etsy-data-warehouse-prod.listing_mart.listings`
+
+**Source Script:** `Rollups/auto/p2/daily/listing_mart.sql`
 
 **Purpose**: Core listing mart table containing current state of all Etsy listings with pricing, availability, and shop information.
 

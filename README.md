@@ -50,6 +50,22 @@ Denormalized, analytics-ready tables for Etsy listing data. Includes pricing, va
 - [listing_all_attributes](listing_mart/listing_all_attributes.md) - ALL listing attributes
 - [listing_current_discounts](listing_mart/listing_current_discounts.md) - Active sales/discounts
 
+**Indicators & Classification:**
+- [listing_indicators](listing_mart/listing_indicators.md) - POD, how-it's-made, flagship segments, personalization
+
+**Text Analysis & Search:**
+- [listing_ngrams](listing_mart/listing_ngrams.md) - Tokens, bigrams, trigrams from titles/tags/styles
+- [listing_ngrams_combined](listing_mart/listing_ngrams_combined.md) - Deduplicated ngrams
+- [listing_all_queries](listing_mart/listing_all_queries.md) - Search queries with engagement metrics
+
+**Performance & Metrics:**
+- [listing_gms](listing_mart/listing_gms.md) - GMS, sales, orders (total, past year, normalized)
+- [listing_post_purch](listing_mart/listing_post_purch.md) - Returns, refunds, ratings, cases
+- [listing_counts](listing_mart/listing_counts.md) - Counts of attributes, tags, views, favorites
+
+**Materialized Views:**
+- [Active Listings Views](listing_mart/materialized_views/README.md) - 11 `_active` views for faster queries
+
 ### transaction_mart
 
 **Schema**: `etsy-data-warehouse-prod.transaction_mart`

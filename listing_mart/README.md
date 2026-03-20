@@ -18,7 +18,13 @@ The `listing_mart` schema contains denormalized, analytics-ready tables for Etsy
 
 **Update Frequency**: Daily (p2 rollup)
 
-**Source Script**: `Rollups/auto/p2/daily/listing_mart.sql`
+**Source Scripts**:
+- `Rollups/auto/p2/daily/listing_mart.sql` - Core tables
+- `Rollups/auto/p2/daily/listing_indicators.sql` - Indicators (POD, how-it's-made, etc.)
+- `Rollups/auto/p2/daily/listing_mart_2.sql` - Ngrams and queries
+- `Rollups/auto/p2/daily/listing_mart_bucket3.sql` - GMS and post-purchase
+- `Rollups/auto/p2/daily/listing_mart_post_analytics.sql` - Counts (depends on analytics)
+- `Rollups/auto/p2/daily/listing_mart_mvs.sql` - Materialized views
 
 ---
 
@@ -55,6 +61,32 @@ The `listing_mart` schema contains denormalized, analytics-ready tables for Etsy
 |-------|-------------|-------------|----------|
 | [listing_all_attributes](listing_all_attributes.md) | ALL listing attributes (many rows per listing) | `listing_id`, `attribute_name`, `attribute_value` | Complete attribute analysis |
 | [listing_current_discounts](listing_current_discounts.md) | Active sales/discounts | `listing_id` | Current promotions |
+
+### Indicators & Classification
+
+| Table | Description | Primary Key | Use Case |
+|-------|-------------|-------------|----------|
+| [listing_indicators](listing_indicators.md) | POD classification, how-it's-made, flagship segments, personalization | `listing_id` | POD detection, seller creation method, segments |
+
+### Text Analysis & Search
+
+| Table | Description | Primary Key | Use Case |
+|-------|-------------|-------------|----------|
+| [listing_ngrams](listing_ngrams.md) | Tokens, bigrams, trigrams from titles/tags/styles (with duplicates) | None | NLP, text analysis, word frequency |
+| [listing_ngrams_combined](listing_ngrams_combined.md) | Deduplicated ngrams per listing | `listing_id`, `ngram` | Simpler ngram queries |
+| [listing_all_queries](listing_all_queries.md) | Search queries that drove clicks/carts/purchases | `listing_id`, `query` | Search analysis, SEO |
+
+### Performance & Metrics
+
+| Table | Description | Primary Key | Use Case |
+|-------|-------------|-------------|----------|
+| [listing_gms](listing_gms.md) | GMS, sales, orders (total, past day, past year, normalized) | `listing_id` | Revenue analysis, sales velocity |
+| [listing_post_purch](listing_post_purch.md) | Returns, refunds, ratings, cases | `listing_id` | Quality, customer satisfaction |
+| [listing_counts](listing_counts.md) | Counts of attributes, tags, materials, views, favorites, images | `listing_id` | Metadata completeness, engagement |
+
+### Materialized Views (Active Listings Only)
+
+**📂 [Materialized Views](materialized_views/README.md)** - 11 `_active` views for faster queries on active listings
 
 ---
 
@@ -116,7 +148,7 @@ ORDER BY lva.attribute_name, lva.attribute_value
 
 ### Money Fields
 
-**All price fields are stored in CENTS** - divide by 100 for display:
+**Price fields in listing tables are stored in CENTS** - divide by 100 for display:
 - `price`, `price_usd`, `price_usa`, `price_usa_usd` (listings)
 - `min_price*`, `max_price*` (listing_variations, listing_variation_attributes)
 - All prices in `csp_prices` array (listing_products)
@@ -127,6 +159,18 @@ price_usd / 100.0 AS price_dollars
 
 -- WRONG
 price_usd AS price_dollars  -- This shows cents, not dollars!
+```
+
+**GMS/revenue fields are already in USD DOLLARS** - no conversion needed:
+- All `*_gms` fields in `listing_gms` (total_gms, past_year_gms, etc.)
+- `transaction_refund_amount` in `listing_post_purch`
+
+```sql
+-- CORRECT - already in dollars
+SELECT total_gms FROM listing_mart.listing_gms
+
+-- WRONG - don't divide GMS fields!
+SELECT total_gms / 100.0 FROM listing_mart.listing_gms
 ```
 
 ### Exchange Rates
