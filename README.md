@@ -124,6 +124,43 @@ GROUP BY order_date, market
 
 **Note**: All transaction_mart money fields are in **USD dollars** (not cents like listing_mart).
 
+### user_mart
+
+**Schema**: `etsy-data-warehouse-prod.user_mart`
+
+User behavior, demographics, and engagement metrics aggregated by user. Includes visit patterns, purchase history, LTV predictions, and email engagement.
+
+**📖 [View user_mart Documentation](user_mart/README.md)**
+
+#### Tables
+
+**Core Profile Tables:**
+- [user_profile](user_mart/user_profile.md) - User demographics, LTV, GDPR settings
+- [mapped_user_profile](user_mart/mapped_user_profile.md) - Profile by mapped_user_id (cross-device)
+
+**Daily Metrics:**
+- [user_visit_daily](user_mart/user_visit_daily.md) - Daily visit metrics by platform/device
+- [user_purch_daily](user_mart/user_purch_daily.md) - Daily purchase metrics
+- [user_visit_daily_analytic](user_mart/user_visit_daily_analytic.md) - Analytics-optimized daily visits
+- [user_purch_daily_analytic](user_mart/user_purch_daily_analytic.md) - Analytics-optimized daily purchases
+
+**Lifetime (LTD) Metrics:**
+- [user_visit_ltd](user_mart/user_visit_ltd.md) - Lifetime visit metrics
+- [user_purch_ltd](user_mart/user_purch_ltd.md) - Lifetime purchase metrics
+- [user_purch_detail_sum](user_mart/user_purch_detail_sum.md) - Detailed purchase summaries
+
+**Time-Windowed Statistics (30d, 90d, 180d, 12m, LTD):**
+- Visit stats: user_visit_stats, user_visit_stats_30d, user_visit_stats_90d, user_visit_stats_180d, user_visit_stats_12m
+- Purchase stats: user_purch_stats, user_purch_stat_30d, user_purch_stat_90d, user_purch_stat_180d, user_purch_stat_12m
+
+**Attribution & Email:**
+- [user_first_visits](user_mart/user_first_visits.md) - First visit attribution
+- [user_first_conv_visits](user_mart/user_first_conv_visits.md) - First converting visit
+- [user_email_settings](user_mart/user_email_settings.md) - Email preferences
+- [mapped_user_email_daily](user_mart/mapped_user_email_daily.md) - Daily email engagement
+
+**Total**: 32 tables
+
 ## Quick Start
 
 ### Example: Get Active Listings with Prices
