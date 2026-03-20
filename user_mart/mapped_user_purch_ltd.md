@@ -53,11 +53,11 @@ WHERE mapped_user_id = 123456789;
 
 ## Column Reference
 
-**Data aggregated at the mapped_user_id level (cross-device, all-time)**
+**Data aggregated at the mapped_user_id level (guest + registered users with same email, all-time)**
 
 | Column | Type | Source Table | Business Logic | Description |
 |--------|------|--------------|----------------|-------------|
-| `mapped_user_id` | INT64 | `user_mart.user_purch_daily` | Primary Key | **Mapped user ID**. Primary Key. Cross-device identifier |
+| `mapped_user_id` | INT64 | `user_mart.user_purch_daily` | Primary Key | **Mapped user ID**. Primary Key. Links guest and registered users with same email |
 | `purch_date` | INT64 | Calculated | `MAX(purch_date)` | Last purchase date (unix format) |
 | `_date` | DATE | Calculated | `MAX(_date)` | Last purchase date (date format) |
 | `first_purch_guest_checkout` | INT64 | `rollups.buyer_first_purchase` | From buyer_first_purchase table | 1 if first purchase was a guest checkout |

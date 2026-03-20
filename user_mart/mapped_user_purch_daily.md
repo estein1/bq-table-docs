@@ -53,11 +53,11 @@ WHERE mapped_user_id = 123456789 AND _date >= '2026-01-01';
 
 ## Column Reference
 
-**Data aggregated at the mapped_user_id level (cross-device)**
+**Data aggregated at the mapped_user_id level (guest + registered users with same email)**
 
 | Column | Type | Source Table | Business Logic | Description |
 |--------|------|--------------|----------------|-------------|
-| `mapped_user_id` | INT64 | `user_mart.user_purch_daily` | Primary Key | **Mapped user ID**. Primary Key. Cross-device identifier |
+| `mapped_user_id` | INT64 | `user_mart.user_purch_daily` | Primary Key | **Mapped user ID**. Primary Key. Links guest and registered users with same email |
 | `purch_date` | INT64 | `user_mart.user_purch_daily` | Direct | Purchase date (unix format) |
 | `_date` | DATE | `user_mart.user_purch_daily` | Direct | Purchase date (date format) |
 | `no_of_etsy_users` | INT64 | `user_mart.user_purch_daily` | `COUNT(DISTINCT user_id WHERE is_guest = 0)` | Number of purchasing registered users for this mapped_user_id |

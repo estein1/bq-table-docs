@@ -59,11 +59,11 @@ WHERE mapped_user_id = 123456789;
 
 ## Column Reference
 
-**Data aggregated at the mapped_user_id level (cross-device)**
+**Data aggregated at the mapped_user_id level (guest + registered users with same email)**
 
 | Column | Type | Source Table | Business Logic | Description |
 |--------|------|--------------|----------------|-------------|
-| `mapped_user_id` | INT64 | `user_mart.user_profile` | Primary Key | **Mapped user ID**. Primary Key. Cross-device identifier |
+| `mapped_user_id` | INT64 | `user_mart.user_profile` | Primary Key | **Mapped user ID**. Primary Key. Links guest and registered users with same email |
 | `user_id` | INT64 | `user_mart.user_profile` | `MIN(user_id)` where is_guest = 0 | Registered user_id associated with mapped_user_id (if any) |
 | `is_guest` | INT64 | Calculated | 1 if mapped_user_id = guest user_id with no registered users | 1 if mapped user ID is same as a guest user ID |
 | `user_state` | STRING | `user_mart.user_profile` | Selected via QUALIFY ranking | User state (active/closed/dead). Selected from top-ranked user_id |

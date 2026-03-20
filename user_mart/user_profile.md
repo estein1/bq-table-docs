@@ -50,7 +50,7 @@ Comprehensive user profile with demographics, account information, LTV predictio
 | `ltv_decile` | INT64 | Temp table: `buyatt_mart.analytics_clv` | `ntile(10)` over expectedgms104 DESC | LTV decile (1-10, 10 = highest LTV) by mapped_user_id |
 | `expected_ltv_104_weeks` | FLOAT64 | Temp table: `buyatt_mart.analytics_clv`, `buyatt_mart.ltv_prediction_data` | Adjusted by purchase_days and recency | Expected GMS over next 104 weeks (adjusted by purchase behavior) |
 | `expected_ltv_52_weeks` | FLOAT64 | Temp table: `buyatt_mart.analytics_clv`, `buyatt_mart.ltv_prediction_data` | Adjusted by purchase_days and recency | Expected GMS over next 52 weeks (adjusted by purchase behavior) |
-| `mapped_user_id` | INT64 | `user_mart.user_mapping` | Coalesce with user_id if NULL | Mapped user ID for cross-device tracking |
+| `mapped_user_id` | INT64 | `user_mart.user_mapping` | Coalesce with user_id if NULL | Mapped user ID (links guest and registered users with same email) |
 | `gdpr_tp` | INT64 | Temp table: `etsy_shard.user_preferences` | Preference ID 791, most recent | GDPR targeted personalization preference (NULL for guests) |
 | `gdpr_p` | INT64 | Temp table: `etsy_shard.user_preferences` | Preference ID 792, most recent | GDPR personalization preference (NULL for guests) |
 | `gdpr_buyer_email` | INT64 | Temp table: `etsy_shard.user_preferences` | Preference ID 793, most recent | GDPR buyer email preference (NULL for guests) |
