@@ -55,23 +55,94 @@ Brief one-line description of the table.
 
 #### Column Reference
 
-Format:
+**REQUIRED FORMAT** - ALL columns MUST be documented with this 5-column table:
+
 ```markdown
 | Column | Type | Source Table | Business Logic | Description |
 |--------|------|--------------|----------------|-------------|
+| `listing_id` | INT64 | `etsy_shard.listings` | Primary Key | Listing ID. Primary Key |
+| `price_usd` | INT64 | `etsy_shard.listings`, temp: `inventory_summary` | Prefers min_price from inventory (channel=1, state=1), falls back to listings.price | **Price in USD cents**. Divide by 100 for dollars |
 ```
 
-**Guidelines:**
-- **Source Table**: Actual BigQuery tables (e.g., `etsy_shard.listings`), NOT temp table names
-- **Business Logic**: High-level summary of transformations, NOT SQL code
-  - Examples: "Prefers min_price from inventory summary, falls back to listings.price"
-  - NOT: `coalesce(ics.min_price, l.price)` with temp table references
-- **Description**: Human-readable explanation with formatting rules (e.g., **STORED IN CENTS**)
+**CRITICAL REQUIREMENTS:**
+- **ALL columns** must be documented (no grouped descriptions or shortcuts)
+- **MUST use the 5-column format** exactly as shown above
+- Do NOT use simplified 3-column tables or grouped descriptions
+- Do NOT use section headers like "### Core Metrics" followed by partial columns
 
-For derived/calculated fields:
+**Column-by-Column Guidelines:**
+
+**Column**: Actual column name with backticks (e.g., `` `listing_id` ``)
+
+**Type**: BigQuery data type (INT64, STRING, NUMERIC, FLOAT64, BOOL, DATE, TIMESTAMP, etc.)
+
+**Source Table**:
+- Actual BigQuery tables (e.g., `etsy_shard.listings`), NOT temp table names
+- For joins: list multiple sources separated by commas
+- For temp tables: show as `table_name`, temp: `temp_table_name` then trace in Business Logic
+- For calculated fields: "Calculated" or the calculation source
+- Examples:
+  - `transaction_mart.all_transactions`
+  - `etsy_index.users_index`, `etsy_shard.user_details`
+  - Temp table: `buyatt_mart.analytics_clv`
+
+**Business Logic**:
+- High-level summary of transformations, NOT SQL code
+- Examples:
+  - "Prefers min_price from inventory summary, falls back to listings.price"
+  - "Sum where live = 1"
+  - "`ntile(10)` over expectedgms104 DESC"
+  - "CASE WHEN platform = 'desktop' THEN 1 END, summed"
+  - "Direct" (for pass-through columns)
+  - "Primary Key"
+- NOT: `coalesce(ics.min_price, l.price)` with temp table references
+
+**Description**:
+- Human-readable explanation with formatting rules
+- Include important notes in **bold** (e.g., **STORED IN CENTS**, **PII**, **USD dollars**)
+- Be concise but complete
+- Examples:
+  - "**Price in USD cents**. Divide by 100 for dollars"
+  - "**PII**: User email (lowercase, trimmed)"
+  - "Desktop visits for the day"
+
+**For derived/calculated fields:**
 - Show what it's calculated from
 - Explain the logic clearly
 - Include special handling (CASE statements, defaults, etc.)
+- Example:
+  ```
+  | `account_age` | INT64 | Calculated | `Floor((UNIX_SECONDS(current_date) - join_date) / 86400)` | Days since account creation |
+  ```
+
+**For tables with many similar columns (platform breakdowns, etc.):**
+- Still document EVERY column individually
+- Use clear patterns but don't group
+- You can add section comment rows for readability:
+  ```markdown
+  | **Platform OS Metrics** | | | | **Desktop, iOS, Android, Other, Undefined** |
+  | `desktop_visits` | INT64 | `analytics.visits` | `SUM(CASE WHEN platform = 'desktop' THEN 1 END)` | Desktop visits |
+  | `ios_os_visits` | INT64 | `analytics.visits` | `SUM(CASE WHEN platform = 'ios' THEN 1 END)` | iOS visits |
+  ```
+
+**Examples of INCORRECT formats to AVOID:**
+
+❌ **Don't use simplified 3-column tables:**
+```markdown
+| Column | Type | Description |
+|--------|------|-------------|
+```
+
+❌ **Don't use grouped descriptions:**
+```markdown
+### Platform Metrics (Desktop, iOS, Android)
+- `{platform}_visits` - Visit count by platform
+- `{platform}_conv_visits` - Converting visits by platform
+```
+
+❌ **Don't skip columns with "see above" or "similar to"**
+
+✅ **Always use the complete 5-column format for EVERY column**
 
 #### Query Guidance Section
 
