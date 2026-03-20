@@ -1,14 +1,18 @@
 ---
 id: listing_images
-title: listing_mart.listing_images
+title: etsy-data-warehouse-prod.listing_mart.listing_images
 sidebar_label: listing_images
 ---
 
-# listing_mart.listing_images
+# listing_images
+
+Listing image URLs, with up to 20 images per listing pivoted into columns. Provides easy access to primary listing image and additional images.
 
 ## Table Overview
 
-**Purpose**: Listing image URLs, with up to 20 images per listing pivoted into columns. Provides easy access to primary listing image and additional images.
+**Full Table Name:** `etsy-data-warehouse-prod.listing_mart.listing_images`
+
+**Source Script:** `Rollups/auto/p2/daily/listing_mart.sql`
 
 **Primary Key**: `listing_id`
 

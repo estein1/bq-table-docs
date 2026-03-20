@@ -1,14 +1,18 @@
 ---
 id: listing_attributes
-title: listing_mart.listing_attributes
+title: etsy-data-warehouse-prod.listing_mart.listing_attributes
 sidebar_label: listing_attributes
 ---
 
-# listing_mart.listing_attributes
+# listing_attributes
+
+Key listing attributes including recipient, color, digital/personalizable flags, and taxonomy categorization. One row per listing.
 
 ## Table Overview
 
-**Purpose**: Key listing attributes including recipient, color, digital/personalizable flags, and taxonomy categorization. One row per listing.
+**Full Table Name:** `etsy-data-warehouse-prod.listing_mart.listing_attributes`
+
+**Source Script:** `Rollups/auto/p2/daily/listing_mart.sql`
 
 **Primary Key**: `listing_id`
 

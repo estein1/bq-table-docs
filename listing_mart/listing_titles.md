@@ -1,14 +1,18 @@
 ---
 id: listing_titles
-title: listing_mart.listing_titles
+title: etsy-data-warehouse-prod.listing_mart.listing_titles
 sidebar_label: listing_titles
 ---
 
-# listing_mart.listing_titles
+# listing_titles
+
+Contains listing titles and descriptions, with automatic fallback to translated versions when original is empty.
 
 ## Table Overview
 
-**Purpose**: Contains listing titles and descriptions, with automatic fallback to translated versions when original is empty.
+**Full Table Name:** `etsy-data-warehouse-prod.listing_mart.listing_titles`
+
+**Source Script:** `Rollups/auto/p2/daily/listing_mart.sql`
 
 **Primary Key**: `listing_id`
 

@@ -1,14 +1,18 @@
 ---
 id: listing_current_discounts
-title: listing_mart.listing_current_discounts
+title: etsy-data-warehouse-prod.listing_mart.listing_current_discounts
 sidebar_label: listing_current_discounts
 ---
 
-# listing_mart.listing_current_discounts
+# listing_current_discounts
+
+Current active discounts/sales for listings. Shows the best (highest percentage) discount currently applicable to each listing. One row per listing with active promotion.
 
 ## Table Overview
 
-**Purpose**: Current active discounts/sales for listings. Shows the best (highest percentage) discount currently applicable to each listing. One row per listing with active promotion.
+**Full Table Name:** `etsy-data-warehouse-prod.listing_mart.listing_current_discounts`
+
+**Source Script:** `Rollups/auto/p2/daily/listing_mart.sql`
 
 **Primary Key**: `listing_id`
 

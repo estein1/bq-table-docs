@@ -1,14 +1,18 @@
 ---
 id: all_custom_property_names
-title: listing_mart.all_custom_property_names
+title: etsy-data-warehouse-prod.listing_mart.all_custom_property_names
 sidebar_label: all_custom_property_names
 ---
 
-# listing_mart.all_custom_property_names
+# all_custom_property_names
+
+Maps custom property names for listing variations. Sellers can create custom variation labels (e.g., "Pattern" instead of standard "Design").
 
 ## Table Overview
 
-**Purpose**: Maps custom property names for listing variations. Sellers can create custom variation labels (e.g., "Pattern" instead of standard "Design").
+**Full Table Name:** `etsy-data-warehouse-prod.listing_mart.all_custom_property_names`
+
+**Source Script:** `Rollups/auto/p2/daily/listing_mart.sql`
 
 **Primary Key**: Composite key (`listing_id`, `property_id`)
 

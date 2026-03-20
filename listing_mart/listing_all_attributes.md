@@ -1,14 +1,18 @@
 ---
 id: listing_all_attributes
-title: listing_mart.listing_all_attributes
+title: etsy-data-warehouse-prod.listing_mart.listing_all_attributes
 sidebar_label: listing_all_attributes
 ---
 
-# listing_mart.listing_all_attributes
+# listing_all_attributes
+
+Comprehensive attribute table containing ALL listing attributes from multiple sources. Each row represents one attribute value for a listing. A single listing can have many rows (one per attribute).
 
 ## Table Overview
 
-**Purpose**: Comprehensive attribute table containing ALL listing attributes from multiple sources. Each row represents one attribute value for a listing. A single listing can have many rows (one per attribute).
+**Full Table Name:** `etsy-data-warehouse-prod.listing_mart.listing_all_attributes`
+
+**Source Script:** `Rollups/auto/p2/daily/listing_mart.sql`
 
 **Primary Key**: Composite key (`listing_id`, `attribute_name`, `attribute_value`)
 

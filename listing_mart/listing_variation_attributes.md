@@ -1,14 +1,18 @@
 ---
 id: listing_variation_attributes
-title: listing_mart.listing_variation_attributes
+title: etsy-data-warehouse-prod.listing_mart.listing_variation_attributes
 sidebar_label: listing_variation_attributes
 ---
 
-# listing_mart.listing_variation_attributes
+# listing_variation_attributes
+
+Detailed variation attributes for each listing variation, one row per listing_variation_id. Includes property names, values, and pricing for each specific variation option.
 
 ## Table Overview
 
-**Purpose**: Detailed variation attributes for each listing variation, one row per listing_variation_id. Includes property names, values, and pricing for each specific variation option.
+**Full Table Name:** `etsy-data-warehouse-prod.listing_mart.listing_variation_attributes`
+
+**Source Script:** `Rollups/auto/p2/daily/listing_mart.sql`
 
 **Primary Key**: Composite key (`listing_id`, `listing_variation_id`)
 

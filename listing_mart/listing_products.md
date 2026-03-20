@@ -1,14 +1,18 @@
 ---
 id: listing_products
-title: listing_mart.listing_products
+title: etsy-data-warehouse-prod.listing_mart.listing_products
 sidebar_label: listing_products
 ---
 
-# listing_mart.listing_products
+# listing_products
+
+Product-level data for listings with inventory, including variations, quantities, and country-specific pricing. One row per product offering.
 
 ## Table Overview
 
-**Purpose**: Product-level data for listings with inventory, including variations, quantities, and country-specific pricing. One row per product offering.
+**Full Table Name:** `etsy-data-warehouse-prod.listing_mart.listing_products`
+
+**Source Script:** `Rollups/auto/p2/daily/listing_mart.sql`
 
 **Primary Key**: `product_id`
 

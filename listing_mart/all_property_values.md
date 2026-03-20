@@ -1,14 +1,18 @@
 ---
 id: all_property_values
-title: listing_mart.all_property_values
+title: etsy-data-warehouse-prod.listing_mart.all_property_values
 sidebar_label: all_property_values
 ---
 
-# listing_mart.all_property_values
+# all_property_values
+
+Reference table mapping value IDs to human-readable attribute values. Used for decoding listing variation values (e.g., "Red", "Large", "Cotton").
 
 ## Table Overview
 
-**Purpose**: Reference table mapping value IDs to human-readable attribute values. Used for decoding listing variation values (e.g., "Red", "Large", "Cotton").
+**Full Table Name:** `etsy-data-warehouse-prod.listing_mart.all_property_values`
+
+**Source Script:** `Rollups/auto/p2/daily/listing_mart.sql`
 
 **Primary Key**: `value_id`
 

@@ -1,14 +1,18 @@
 ---
 id: listing_variations
-title: listing_mart.listing_variations
+title: etsy-data-warehouse-prod.listing_mart.listing_variations
 sidebar_label: listing_variations
 ---
 
-# listing_mart.listing_variations
+# listing_variations
+
+Summary of listing variations, one row per listing, containing variation counts, pricing ranges, and linking information.
 
 ## Table Overview
 
-**Purpose**: Summary of listing variations, one row per listing, containing variation counts, pricing ranges, and linking information.
+**Full Table Name:** `etsy-data-warehouse-prod.listing_mart.listing_variations`
+
+**Source Script:** `Rollups/auto/p2/daily/listing_mart.sql`
 
 **Primary Key**: `listing_id`
 

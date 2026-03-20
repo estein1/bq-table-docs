@@ -1,14 +1,18 @@
 ---
 id: all_properties
-title: listing_mart.all_properties
+title: etsy-data-warehouse-prod.listing_mart.all_properties
 sidebar_label: all_properties
 ---
 
-# listing_mart.all_properties
+# all_properties
+
+Reference table mapping property IDs to human-readable attribute names. Used for decoding listing variations and attributes.
 
 ## Table Overview
 
-**Purpose**: Reference table mapping property IDs to human-readable attribute names. Used for decoding listing variations and attributes.
+**Full Table Name:** `etsy-data-warehouse-prod.listing_mart.all_properties`
+
+**Source Script:** `Rollups/auto/p2/daily/listing_mart.sql`
 
 **Primary Key**: `property_id`
 
