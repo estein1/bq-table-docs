@@ -27,13 +27,22 @@ For each table, create `{table_name}.md` with:
 ```yaml
 ---
 id: {table_name}
-title: {schema}.{table_name}
+title: {dataset}.{schema}.{table_name}
 sidebar_label: {table_name}
 ---
 ```
 
+#### Document Header
+```markdown
+# {table_name}
+
+Brief one-line description of the table.
+```
+
 #### Table Overview
-- Purpose
+- **Full Table Name**: `` `{dataset}.{schema}.{table_name}` ``
+- **Source Script**: `Rollups/auto/{priority}/daily/{script_name}.sql`
+- Purpose (detailed)
 - Primary Key
 - Clustering
 - Update Frequency
@@ -103,12 +112,36 @@ Create `{schema}/README.md` with:
 - Important formatting rules (money, dates, etc.)
 - Best practices
 - Support information
+- Source scripts section listing all rollup scripts
 
-### 4. Update Root README
+### 4. Document Materialized Views (if applicable)
 
-Update `/Users/estein/bq-table-docs/README.md` to include new schema section.
+For schemas with materialized views:
+- Create `{schema}/materialized_views/README.md`
+- Document each materialized view with:
+  - Base table reference
+  - Filter logic (e.g., `WHERE is_active = 1`)
+  - Performance benefits
+  - When to use vs base table
+- Include comparison examples
 
-### 5. Commit and Push to GitHub
+### 5. Update Root README
+
+Update `/Users/estein/bq-table-docs/README.md` to include:
+- New schema section with all tables listed by category
+- Links to all table documentation
+- Links to materialized views (if applicable)
+
+### 6. Update Existing Documentation Format
+
+When updating existing table documentation:
+- Add **Full Table Name** field with complete `dataset.schema.table` path
+- Add **Source Script** field showing which rollup creates the table
+- Update frontmatter `title:` to include dataset prefix
+- Simplify h1 heading to just table name (not schema.table)
+- Maintain consistency with newly created docs
+
+### 7. Commit and Push to GitHub
 
 ```bash
 cd /Users/estein/bq-table-docs
@@ -180,10 +213,15 @@ bq-table-docs/
 ├── listing_mart/
 │   ├── README.md
 │   ├── listings.md
+│   ├── listing_indicators.md
+│   ├── listing_gms.md
+│   ├── materialized_views/
+│   │   └── README.md
 │   └── ...
 └── transaction_mart/
     ├── README.md
     ├── receipts_gms.md
+    ├── transaction_obt.md
     └── ...
 ```
 
@@ -197,24 +235,72 @@ bq-table-docs/
 Before committing:
 - ✅ All source tables traced to original sources (no temp tables)
 - ✅ Business logic is readable summaries, not code
-- ✅ All 12 tables in schema documented
+- ✅ All tables in schema documented
+- ✅ Full table names include dataset prefix (e.g., `etsy-data-warehouse-prod.listing_mart.table`)
+- ✅ Source script referenced in each table doc
+- ✅ Frontmatter title includes full dataset.schema.table path
+- ✅ H1 heading uses simple table name only
 - ✅ Related Tables section lists ALL tables in schema
 - ✅ Query Guidance has real SQL examples
-- ✅ Schema README has table index
-- ✅ Root README updated with new schema
+- ✅ Schema README has table index organized by category
+- ✅ Schema README lists all source scripts
+- ✅ Materialized views documented (if applicable)
+- ✅ Root README updated with new schema and tables
 
-## Example Invocation
+## Example Invocations
+
+### Example 1: Document New Schema
 
 **User:** "Document the transaction_mart schema. The tables are created in these scripts:
 - Rollups/auto/p2/daily/transaction_mart_receipts.sql
 - Rollups/auto/p2/daily/transaction_mart_transactions.sql"
 
 **Claude:**
-1. Downloads both SQL scripts
+1. Downloads both SQL scripts from GitHub
 2. Parses all CREATE TABLE statements
-3. Creates docs for each table (receipts_gms, transactions_gms, etc.)
-4. Creates transaction_mart/README.md
+3. Creates docs for each table with full table names and source scripts
+4. Creates transaction_mart/README.md with table index
 5. Updates root README.md
+6. Commits and pushes to GitHub
+
+### Example 2: Add Tables to Existing Schema
+
+**User:** "Add documentation for these listing_mart tables from these scripts:
+- Rollups/auto/p2/daily/listing_indicators.sql
+- Rollups/auto/p2/daily/listing_mart_bucket3.sql"
+
+**Claude:**
+1. Downloads SQL scripts
+2. Parses CREATE TABLE statements
+3. Creates new table docs (listing_indicators.md, listing_gms.md, etc.)
+4. Updates listing_mart/README.md to include new tables in appropriate categories
+5. Updates root README.md
+6. Commits and pushes to GitHub
+
+### Example 3: Update Existing Documentation Format
+
+**User:** "Update all existing table docs to include full table names and source scripts"
+
+**Claude:**
+1. Reads all existing .md files in schema folders
+2. Updates each file:
+   - Adds **Full Table Name** field
+   - Adds **Source Script** field
+   - Updates frontmatter title
+   - Simplifies h1 heading
+3. Commits all changes with descriptive message
+4. Pushes to GitHub
+
+### Example 4: Document Materialized Views
+
+**User:** "Document the listing_mart materialized views from listing_mart_mvs.sql"
+
+**Claude:**
+1. Downloads listing_mart_mvs.sql
+2. Identifies all CREATE MATERIALIZED VIEW statements
+3. Creates materialized_views/README.md
+4. Documents each view with base table, filter, and usage guidance
+5. Updates listing_mart/README.md to link to materialized views
 6. Commits and pushes to GitHub
 
 ## Notes
