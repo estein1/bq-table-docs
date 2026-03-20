@@ -51,6 +51,23 @@ FROM `etsy-data-warehouse-prod.user_mart.user_purch_ltd_analytic`
 WHERE user_id = 123456789;
 ```
 
+## Column Reference
+
+| Column | Type | Source Table | Business Logic | Description |
+|--------|------|--------------|----------------|-------------|
+| `user_id` | INT64 | `user_mart.user_purch_ltd` | Primary Key | User ID. Primary Key |
+| `purch_date` | INT64 | `user_mart.user_purch_ltd` | Direct | Last purchase date (unix format) |
+| `_date` | DATE | `user_mart.user_purch_ltd` | Direct | Last purchase date (date format) |
+| `avg_days_bet_purch` | INT64 | Calculated | `DATE_DIFF(last_purch_date_dt, first_purch_date_dt, DAY) / (days_purchased - 1)` | Average days between purchases (LTD) |
+| `gms_gross_rank` | INT64 | Calculated | `RANK() OVER (ORDER BY gms_gross DESC)` | Rank of user LTD GMS gross (highest user = 1) |
+| `gms_gross_percentile` | INT64 | Calculated | `NTILE(100) OVER (ORDER BY gms_gross)` | Percentile of user LTD GMS gross (highest user = 100) |
+| `gms_net_rank` | INT64 | Calculated | `RANK() OVER (ORDER BY gms_net DESC)` | Rank of user LTD GMS net (highest user = 1) |
+| `gms_net_percentile` | INT64 | Calculated | `NTILE(100) OVER (ORDER BY gms_net)` | Percentile of user LTD GMS net (highest user = 100) |
+| `gms_gross_12m_rank` | INT64 | Calculated | `RANK() OVER (ORDER BY gms_gross_12m DESC)` | Rank of user 12 month GMS gross (highest user = 1) |
+| `gms_gross_12m_percentile` | INT64 | Calculated | `NTILE(100) OVER (ORDER BY gms_gross_12m)` | Percentile of user 12 month GMS gross (highest user = 100) |
+| `gms_net_12m_rank` | INT64 | Calculated | `RANK() OVER (ORDER BY gms_net_12m DESC)` | Rank of user 12 month GMS net (highest user = 1) |
+| `gms_net_12m_percentile` | INT64 | Calculated | `NTILE(100) OVER (ORDER BY gms_net_12m)` | Percentile of user 12 month GMS net (highest user = 100) |
+
 ## Related Tables
 
 - Other user_purch_* tables for different aggregation levels

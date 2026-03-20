@@ -22,6 +22,19 @@ Analytics-optimized version of user_visit_daily with additional calculated metri
 
 **Owner Team**: visits-support@etsy.pagerduty.com
 
+## Column Reference
+
+| Column | Type | Source Table | Business Logic | Description |
+|--------|------|--------------|----------------|-------------|
+| `user_id` | INT64 | `user_mart.user_visit_daily` | Primary Key | User ID. Primary Key |
+| `run_date` | INT64 | `user_mart.user_visit_daily` | Direct | Date in Unix format |
+| `visit_day_number` | INT64 | Calculated | `ROW_NUMBER() OVER (PARTITION BY user_id ORDER BY run_date)` | Sequence number of visit date for user (1st day visited = 1, 2nd = 2, etc.) |
+| `days_since_last_visit` | INT64 | Calculated | `(run_date - LAG(run_date, 1)) / 86400` over user_id, ordered by run_date | Number of days since last visit for this user |
+| `user_duration_rank` | INT64 | Calculated | `RANK() OVER (PARTITION BY user_id ORDER BY visit_duration_seconds DESC)` | Descending rank of visit duration for user (longest visit = 1) |
+| `user_duration_percentile` | INT64 | Calculated | `NTILE(100) OVER (PARTITION BY user_id ORDER BY visit_duration_seconds)` | Percentile of visit duration for user (top 1% = 100) |
+| `date_duration_rank` | INT64 | Calculated | `RANK() OVER (PARTITION BY run_date ORDER BY visit_duration_seconds DESC)` | Descending rank of visit duration for this date (longest visit = 1) |
+| `date_duration_percentile` | INT64 | Calculated | `NTILE(100) OVER (PARTITION BY run_date ORDER BY visit_duration_seconds)` | Percentile of visit duration for this date (top 1% = 100) |
+
 ## Query Guidance
 
 ### Common Query Pattern

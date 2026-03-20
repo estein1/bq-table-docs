@@ -51,6 +51,20 @@ FROM `etsy-data-warehouse-prod.user_mart.user_purch_daily_analytic`
 WHERE user_id = 123456789 AND _date >= '2026-01-01';
 ```
 
+## Column Reference
+
+| Column | Type | Source Table | Business Logic | Description |
+|--------|------|--------------|----------------|-------------|
+| `user_id` | INT64 | `user_mart.user_purch_daily` | Primary Key | User ID. Primary Key |
+| `purch_date` | INT64 | `user_mart.user_purch_daily` | Direct | Purchase date (unix format) |
+| `_date` | DATE | `user_mart.user_purch_daily` | Direct | Purchase date (date format) |
+| `purch_day_number` | INT64 | Calculated | `ROW_NUMBER() OVER (PARTITION BY user_id ORDER BY _date)` | Purchase day sequence number (1st purchase day = 1, 2nd = 2, etc.) |
+| `days_since_last_purch` | INT64 | Calculated | `DATE_DIFF(_date, LAG(_date, 1) OVER (...), DAY)` | Number of days since last purchase date for this user |
+| `user_gms_rank` | INT64 | Calculated | `RANK() OVER (PARTITION BY user_id ORDER BY gms_gross DESC)` | Rank of daily GMS for user (highest GMS day = 1) |
+| `user_gms_percentile` | INT64 | Calculated | `NTILE(100) OVER (PARTITION BY user_id ORDER BY gms_gross)` | Percentile of daily GMS for user (highest GMS day = 100) |
+| `date_gms_rank` | INT64 | Calculated | `RANK() OVER (PARTITION BY purch_date ORDER BY gms_gross DESC)` | Rank of user GMS for this date (highest user = 1) |
+| `date_gms_percentile` | INT64 | Calculated | `NTILE(100) OVER (PARTITION BY purch_date ORDER BY gms_gross)` | Percentile of user GMS for this date (highest user = 100) |
+
 ## Related Tables
 
 - Other user_purch_* tables for different aggregation levels
