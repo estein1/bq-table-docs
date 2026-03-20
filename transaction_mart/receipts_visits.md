@@ -1,12 +1,16 @@
 ---
 id: receipts_visits
-title: transaction_mart.receipts_visits
+title: etsy-data-warehouse-prod.transaction_mart.receipts_visits
 sidebar_label: receipts_visits
 ---
 
-# transaction_mart.receipts_visits
+# receipts_visits
 
 ## Table Overview
+
+**Full Table Name:** `etsy-data-warehouse-prod.transaction_mart.receipts_visits`
+
+**Source Script:** `Rollups/auto/p1/daily/transaction_mart_*.sql`
 
 **Purpose**: Visit attribution data for each receipt. Aggregated from transactions_visits using MIN() to select one visit per receipt. **Simplified receipt-level visit attribution**.
 

@@ -1,12 +1,16 @@
 ---
 id: accounting_seller
-title: transaction_mart.accounting_seller
+title: etsy-data-warehouse-prod.transaction_mart.accounting_seller
 sidebar_label: accounting_seller
 ---
 
-# transaction_mart.accounting_seller
+# accounting_seller
 
 ## Table Overview
+
+**Full Table Name:** `etsy-data-warehouse-prod.transaction_mart.accounting_seller`
+
+**Source Script:** `Rollups/auto/p1/daily/transaction_mart_*.sql`
 
 **Purpose**: Seller location information from accounting perspective. One row per accounting_gms record with seller's location based on accounting creation timestamp (not transaction timestamp).
 

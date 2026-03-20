@@ -1,12 +1,16 @@
 ---
 id: accounting_gms
-title: transaction_mart.accounting_gms
+title: etsy-data-warehouse-prod.transaction_mart.accounting_gms
 sidebar_label: accounting_gms
 ---
 
-# transaction_mart.accounting_gms
+# accounting_gms
 
 ## Table Overview
+
+**Full Table Name:** `etsy-data-warehouse-prod.transaction_mart.accounting_gms`
+
+**Source Script:** `Rollups/auto/p1/daily/transaction_mart_*.sql`
 
 **Purpose**: Accounting perspective GMS (Gross Merchandise Sales) for each transaction. Calculated from billing ledger, payments adjustments, and FRE (Financial Reporting Engine) data. **This is the accounting system of record for GMS**.
 

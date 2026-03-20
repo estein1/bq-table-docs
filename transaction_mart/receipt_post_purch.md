@@ -1,12 +1,16 @@
 ---
 id: receipt_post_purch
-title: transaction_mart.receipt_post_purch
+title: etsy-data-warehouse-prod.transaction_mart.receipt_post_purch
 sidebar_label: receipt_post_purch
 ---
 
-# transaction_mart.receipt_post_purch
+# receipt_post_purch
 
 ## Table Overview
+
+**Full Table Name:** `etsy-data-warehouse-prod.transaction_mart.receipt_post_purch`
+
+**Source Script:** `Rollups/auto/p1/daily/transaction_mart_*.sql`
 
 **Purpose**: Post-purchase metrics for receipts. One row per receipt that has post-purchase activity (refunds, returns, cases, or help requests). **Excludes receipts with no post-purchase activity**.
 

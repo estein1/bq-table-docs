@@ -1,12 +1,16 @@
 ---
 id: transaction_post_purch
-title: transaction_mart.transaction_post_purch
+title: etsy-data-warehouse-prod.transaction_mart.transaction_post_purch
 sidebar_label: transaction_post_purch
 ---
 
-# transaction_mart.transaction_post_purch
+# transaction_post_purch
 
 ## Table Overview
+
+**Full Table Name:** `etsy-data-warehouse-prod.transaction_mart.transaction_post_purch`
+
+**Source Script:** `Rollups/auto/p1/daily/transaction_mart_*.sql`
 
 **Purpose**: Post-purchase metrics for transactions. One row per transaction that has post-purchase activity (refunds, cancellations, or reviews). **Excludes transactions with no post-purchase activity**.
 

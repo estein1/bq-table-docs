@@ -1,12 +1,16 @@
 ---
 id: transactions_seller
-title: transaction_mart.transactions_seller
+title: etsy-data-warehouse-prod.transaction_mart.transactions_seller
 sidebar_label: transactions_seller
 ---
 
-# transaction_mart.transactions_seller
+# transactions_seller
 
 ## Table Overview
+
+**Full Table Name:** `etsy-data-warehouse-prod.transaction_mart.transactions_seller`
+
+**Source Script:** `Rollups/auto/p1/daily/transaction_mart_*.sql`
 
 **Purpose**: Seller location information for each transaction. One row per transaction with seller's location at the time of the transaction.
 

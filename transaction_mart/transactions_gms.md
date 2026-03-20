@@ -1,12 +1,16 @@
 ---
 id: transactions_gms
-title: transaction_mart.transactions_gms
+title: etsy-data-warehouse-prod.transaction_mart.transactions_gms
 sidebar_label: transactions_gms
 ---
 
-# transaction_mart.transactions_gms
+# transactions_gms
 
 ## Table Overview
+
+**Full Table Name:** `etsy-data-warehouse-prod.transaction_mart.transactions_gms`
+
+**Source Script:** `Rollups/auto/p1/daily/transaction_mart_*.sql`
 
 **Purpose**: Transaction-level GMS (Gross Merchandise Sales) with buyer/seller demographics and category data. Combines operational GMS calculations with accounting GMS for comparison. **Key table for transaction-level revenue analysis**.
 

@@ -1,12 +1,16 @@
 ---
 id: transactions_visits
-title: transaction_mart.transactions_visits
+title: etsy-data-warehouse-prod.transaction_mart.transactions_visits
 sidebar_label: transactions_visits
 ---
 
-# transaction_mart.transactions_visits
+# transactions_visits
 
 ## Table Overview
+
+**Full Table Name:** `etsy-data-warehouse-prod.transaction_mart.transactions_visits`
+
+**Source Script:** `Rollups/auto/p1/daily/transaction_mart_*.sql`
 
 **Purpose**: Visit attribution data for each transaction. Associates transactions with the visit that led to the purchase, including platform, channel, and referrer information.
 

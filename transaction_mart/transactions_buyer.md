@@ -1,12 +1,16 @@
 ---
 id: transactions_buyer
-title: transaction_mart.transactions_buyer
+title: etsy-data-warehouse-prod.transaction_mart.transactions_buyer
 sidebar_label: transactions_buyer
 ---
 
-# transaction_mart.transactions_buyer
+# transactions_buyer
 
 ## Table Overview
+
+**Full Table Name:** `etsy-data-warehouse-prod.transaction_mart.transactions_buyer`
+
+**Source Script:** `Rollups/auto/p1/daily/transaction_mart_*.sql`
 
 **Purpose**: Buyer information for each transaction. One row per transaction with buyer location, payment method, and receipt status details.
 

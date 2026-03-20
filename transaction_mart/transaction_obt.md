@@ -1,12 +1,16 @@
 ---
 id: transaction_obt
-title: transaction_mart.transaction_obt
+title: etsy-data-warehouse-prod.transaction_mart.transaction_obt
 sidebar_label: transaction_obt
 ---
 
-# transaction_mart.transaction_obt
+# transaction_obt
 
 ## Table Overview
+
+**Full Table Name:** `etsy-data-warehouse-prod.transaction_mart.transaction_obt`
+
+**Source Script:** `Rollups/auto/p1/daily/transaction_mart_*.sql`
 
 **Purpose**: **One Big Table (OBT) for transactions**. Complete transaction-level data with all related information pre-joined: buyer/seller details, GMS, categories, visit attribution, post-purchase metrics. **PREFERRED TABLE for transaction-level queries**.
 

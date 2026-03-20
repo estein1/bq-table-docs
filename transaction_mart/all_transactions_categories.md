@@ -1,12 +1,16 @@
 ---
 id: all_transactions_categories
-title: transaction_mart.all_transactions_categories
+title: etsy-data-warehouse-prod.transaction_mart.all_transactions_categories
 sidebar_label: all_transactions_categories
 ---
 
-# transaction_mart.all_transactions_categories
+# all_transactions_categories
 
 ## Table Overview
+
+**Full Table Name:** `etsy-data-warehouse-prod.transaction_mart.all_transactions_categories`
+
+**Source Script:** `Rollups/auto/p1/daily/transaction_mart_*.sql`
 
 **Purpose**: Category and taxonomy information for each transaction. One row per transaction with hierarchical category data and marketplace flags (vintage, handmade, supplies).
 

@@ -1,12 +1,16 @@
 ---
 id: receipts_gms
-title: transaction_mart.receipts_gms
+title: etsy-data-warehouse-prod.transaction_mart.receipts_gms
 sidebar_label: receipts_gms
 ---
 
-# transaction_mart.receipts_gms
+# receipts_gms
 
 ## Table Overview
+
+**Full Table Name:** `etsy-data-warehouse-prod.transaction_mart.receipts_gms`
+
+**Source Script:** `Rollups/auto/p1/daily/transaction_mart_*.sql`
 
 **Purpose**: Receipt-level GMS (Gross Merchandise Sales) metrics. One row per receipt with aggregated transaction-level and receipt-level GMS calculations. **Key table for revenue analysis**.
 
