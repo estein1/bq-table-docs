@@ -10,7 +10,7 @@ sidebar_label: receipts_visits
 
 **Full Table Name:** `etsy-data-warehouse-prod.transaction_mart.receipts_visits`
 
-**Source Script:** `Rollups/auto/p1/daily/transaction_mart_*.sql`
+**Source Script:** `Rollups/auto/p2/daily/post-visits/trans_mart_visits.sql`
 
 **Purpose**: Visit attribution data for each receipt. Aggregated from transactions_visits using MIN() to select one visit per receipt. **Simplified receipt-level visit attribution**.
 

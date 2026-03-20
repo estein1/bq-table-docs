@@ -10,7 +10,7 @@ sidebar_label: receipt_obt
 
 **Full Table Name:** `etsy-data-warehouse-prod.transaction_mart.receipt_obt`
 
-**Source Script:** `Rollups/auto/p1/daily/transaction_mart_*.sql`
+**Source Script:** `Rollups/auto/p2/daily/post-visits/trans_mart_obt.sql`
 
 **Purpose**: **One Big Table (OBT) for receipts**. Complete receipt-level data with all related information pre-joined: buyer/seller details, GMS, visit attribution, post-purchase metrics. **PREFERRED TABLE for receipt-level queries**.
 

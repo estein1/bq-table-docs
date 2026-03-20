@@ -10,7 +10,7 @@ sidebar_label: all_receipts
 
 **Full Table Name:** `etsy-data-warehouse-prod.transaction_mart.all_receipts`
 
-**Source Script:** `Rollups/auto/p1/daily/transaction_mart_*.sql`
+**Source Script:** `Rollups/auto/p1/daily/transactions-mart/trans_mart_by_date.sql`
 
 **Purpose**: Foundation table containing core receipt-level data for all Etsy orders. One row per receipt with buyer information, payment details, and order metadata.
 

@@ -10,7 +10,7 @@ sidebar_label: accounting_gms_by_trans
 
 **Full Table Name:** `etsy-data-warehouse-prod.transaction_mart.accounting_gms_by_trans`
 
-**Source Script:** `Rollups/auto/p1/daily/transaction_mart_*.sql`
+**Source Script:** `Rollups/auto/p1/daily/transactions-mart/trans_mart_by_date.sql`
 
 **Purpose**: Simplified accounting GMS view with one row per transaction. Aggregates multiple accounting_gms records (which can have different dates/timestamps) into a single row per transaction_id.
 

@@ -10,7 +10,7 @@ sidebar_label: transactions_gms_by_trans
 
 **Full Table Name:** `etsy-data-warehouse-prod.transaction_mart.transactions_gms_by_trans`
 
-**Source Script:** `Rollups/auto/p1/daily/transaction_mart_*.sql`
+**Source Script:** `Rollups/auto/p1/daily/transactions-mart/trans_mart_by_date.sql`
 
 **Purpose**: Transaction-level **operational GMS** (calculated from transaction prices) with buyer/seller demographics and category data. **Alternative to transactions_gms with operational GMS instead of accounting GMS**.
 

@@ -10,7 +10,7 @@ sidebar_label: receipt_post_purch
 
 **Full Table Name:** `etsy-data-warehouse-prod.transaction_mart.receipt_post_purch`
 
-**Source Script:** `Rollups/auto/p1/daily/transaction_mart_*.sql`
+**Source Script:** `Rollups/auto/p1/daily/transactions-mart/trans_mart_by_date.sql`
 
 **Purpose**: Post-purchase metrics for receipts. One row per receipt that has post-purchase activity (refunds, returns, cases, or help requests). **Excludes receipts with no post-purchase activity**.
 

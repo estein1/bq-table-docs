@@ -10,7 +10,7 @@ sidebar_label: transactions_seller
 
 **Full Table Name:** `etsy-data-warehouse-prod.transaction_mart.transactions_seller`
 
-**Source Script:** `Rollups/auto/p1/daily/transaction_mart_*.sql`
+**Source Script:** `Rollups/auto/p1/daily/transactions-mart/trans_mart_by_date.sql`
 
 **Purpose**: Seller location information for each transaction. One row per transaction with seller's location at the time of the transaction.
 

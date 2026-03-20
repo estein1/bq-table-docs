@@ -10,7 +10,7 @@ sidebar_label: transactions_visits
 
 **Full Table Name:** `etsy-data-warehouse-prod.transaction_mart.transactions_visits`
 
-**Source Script:** `Rollups/auto/p1/daily/transaction_mart_*.sql`
+**Source Script:** `Rollups/auto/p2/daily/post-visits/trans_mart_visits.sql`
 
 **Purpose**: Visit attribution data for each transaction. Associates transactions with the visit that led to the purchase, including platform, channel, and referrer information.
 

@@ -10,7 +10,7 @@ sidebar_label: all_transactions
 
 **Full Table Name:** `etsy-data-warehouse-prod.transaction_mart.all_transactions`
 
-**Source Script:** `Rollups/auto/p1/daily/transaction_mart_*.sql`
+**Source Script:** `Rollups/auto/p1/daily/transactions-mart/trans_mart_by_date.sql`
 
 **Purpose**: Foundation table containing core transaction-level data for all Etsy purchases. One row per transaction (line item) with buyer, seller, listing, and price information.
 

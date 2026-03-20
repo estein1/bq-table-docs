@@ -10,7 +10,7 @@ sidebar_label: transactions_buyer
 
 **Full Table Name:** `etsy-data-warehouse-prod.transaction_mart.transactions_buyer`
 
-**Source Script:** `Rollups/auto/p1/daily/transaction_mart_*.sql`
+**Source Script:** `Rollups/auto/p1/daily/transactions-mart/trans_mart_by_date.sql`
 
 **Purpose**: Buyer information for each transaction. One row per transaction with buyer location, payment method, and receipt status details.
 

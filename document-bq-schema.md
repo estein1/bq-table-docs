@@ -9,15 +9,18 @@ User provides:
 - One or more SQL script paths/URLs containing CREATE TABLE statements
 - Optional: GitHub repo path (defaults to `/Users/estein/bq-table-docs`)
 
+**IMPORTANT**: Always ask the user for the exact source script paths. Do NOT use wildcards (e.g., `transaction_mart_*.sql`) or generic patterns unless explicitly provided by the user. Each table should reference the specific script that creates it.
+
 ## Process
 
 ### 1. Download and Parse SQL Scripts
 
 For each SQL script:
-- Download from GitHub/local path
+- Download from GitHub/local path using the exact path provided by the user
 - Parse all `CREATE TABLE` or `CREATE OR REPLACE TABLE` statements
 - Extract table names, column definitions, source tables, and business logic
 - Identify temp tables and trace their lineage back to source tables
+- **Map each table to its creating script** - do not use wildcards or generic patterns
 
 ### 2. Generate Table Documentation
 
@@ -41,7 +44,9 @@ Brief one-line description of the table.
 
 #### Table Overview
 - **Full Table Name**: `` `{dataset}.{schema}.{table_name}` ``
-- **Source Script**: `Rollups/auto/{priority}/daily/{script_name}.sql`
+- **Source Script**: `Rollups/auto/{priority}/daily/{exact_folder_path}/{exact_script_name}.sql`
+  - **MUST be the exact script path**, not a wildcard pattern
+  - If unknown, ask the user for the correct script path
 - Purpose (detailed)
 - Primary Key
 - Clustering
@@ -310,3 +315,7 @@ Before committing:
 - Include comprehensive Query Guidance for every table
 - Maintain consistent formatting across all docs
 - Test that internal links work (table names in Related Tables)
+- **CRITICAL**: Never use wildcard patterns for source scripts (e.g., `transaction_mart_*.sql`)
+  - Always use the exact script path that creates the table
+  - If you don't know the exact script, ask the user instead of guessing
+  - Download and parse scripts to map tables to their creating scripts

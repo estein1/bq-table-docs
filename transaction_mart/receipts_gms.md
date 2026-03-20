@@ -10,7 +10,7 @@ sidebar_label: receipts_gms
 
 **Full Table Name:** `etsy-data-warehouse-prod.transaction_mart.receipts_gms`
 
-**Source Script:** `Rollups/auto/p1/daily/transaction_mart_*.sql`
+**Source Script:** `Rollups/auto/p1/daily/transactions-mart/trans_mart_by_date.sql`
 
 **Purpose**: Receipt-level GMS (Gross Merchandise Sales) metrics. One row per receipt with aggregated transaction-level and receipt-level GMS calculations. **Key table for revenue analysis**.
 
